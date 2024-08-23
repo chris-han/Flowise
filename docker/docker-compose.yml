@@ -1,7 +1,12 @@
 version: '3.1'
 
+# networks:
+#   flowise_network:
+#     driver: bridge
+
 services:
     flowise:
+        # network_mode: host
         image: flowiseai/flowise
         restart: always
         environment:
@@ -34,3 +39,15 @@ services:
         volumes:
             - ~/.flowise:/root/.flowise
         entrypoint: /bin/sh -c "sleep 3; flowise start"
+        command: /bin/sh -c "sleep 3; flowise start"
+        # networks:
+        #   - flowise_network
+    # searxng:
+    #     image: searxng/searxng:latest
+    #     restart: always
+    #     environment:
+    #         - BASE_URL=http://localhost:8080/  # Adjust BASE_URL as needed
+    #     ports:
+    #         - '8080:8080'
+    #     networks:
+    #       - flowise_network
